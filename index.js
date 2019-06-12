@@ -33,5 +33,14 @@ server.get('/api/users/:id', (req, res) => {
     .catch(err => res.status(404).json({ message: "The user with the specified ID does not exist." }))
 })
 
+server.delete('/api/users/:id', (req, res) => {
+    db.remove(req.params.id)
+    .then(users => {
+        if(users) {
+            res.status(200).end()
+        }
+    })
+})
+
 
 server.listen(4400, () => console.log('Listening on port 4400'));
